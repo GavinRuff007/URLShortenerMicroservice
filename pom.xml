@@ -47,8 +47,7 @@
     <modules>
         <module>shortener-service</module>
         <module>redirect-service</module>
-        <module>analytics-service</module>
-        <module>expiration-service</module>
+        <module>caching-service</module>
         <module>common-lib</module>
         <module>api-gateway</module>
     </modules>

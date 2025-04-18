@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -38,9 +40,12 @@ public class UrlShortenerService {
                 .build();
 
         repository.save(urlMapping);
+        Map<String,String> stringStringMap = new HashMap<>();
+        stringStringMap.put("shortCode", shortCode);
+        stringStringMap.put("originalUrl", originalUrl);
 
         // ارسال پیام به Kafka برای این لینک ایجاد شده
-        kafkaTemplate.send("url-created-topic", shortCode);
+        kafkaTemplate.send("url-created-topic", stringStringMap.toString());
 
         return shortCode;
     }
