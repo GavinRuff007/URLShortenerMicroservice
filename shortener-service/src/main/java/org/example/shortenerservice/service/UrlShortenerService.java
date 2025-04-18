@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -20,18 +21,21 @@ public class UrlShortenerService {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     private static final int SHORT_CODE_LENGTH = 6;
-    private static final int EXPIRY_DAYS = 7;
+    private static final int EXPIRY_HOURS = 7;
 
     public String shortenUrl(String originalUrl) {
         String shortCode = generateUniqueCode();
 
-        Instant expiryDate = Instant.now().plus(EXPIRY_DAYS, ChronoUnit.DAYS);
+        Instant expiryInstant = Instant.now().plus(EXPIRY_HOURS, ChronoUnit.HOURS);
+        Date expiryDate = Date.from(expiryInstant);
+
+        Date createdAt = Date.from(Instant.now());
 
         UrlMapping urlMapping = UrlMapping.builder()
                 .shortCode(shortCode)
                 .originalUrl(originalUrl)
                 .expiryDate(expiryDate)
-                .createdAt(Instant.now())
+                .createdAt(createdAt)
                 .build();
 
         repository.save(urlMapping);

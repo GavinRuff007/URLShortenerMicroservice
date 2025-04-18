@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
+import java.util.Date;
 
 
 @Data
@@ -23,7 +24,7 @@ public class UrlMapping {
     private String originalUrl;
 
     @Indexed(expireAfterSeconds = 0)
-    private Instant expiryDate;
+    private Date  expiryDate;
 
-    private Instant createdAt;
+    private Date createdAt;
 }
