@@ -42,8 +42,8 @@ spring:
       port: 6379
 
 jwt:
-  secret-key: Parsa
-  expiration: 3600
+  secret-key: my-secret-key
+  expiration: 3600000
 
 rateLimitConfig:
   defaultText: "Too many requests. Please try again later."

@@ -2,6 +2,7 @@ package org.example.apigateway.util;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -13,8 +14,13 @@ import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
-    private String secretKey = "my-secret-key";  // کلید مخفی شما
-    private long validityInMilliseconds = 3600000; // مدت اعتبار توکن (مثلا یک ساعت)
+
+
+    @Value("${jwt.secret-key}")
+    private String secretKey;
+
+    @Value("${jwt.expiration}")
+    private long validityInMilliseconds;
 
 
     public String createToken(String username) {
@@ -34,7 +40,7 @@ public class JwtTokenProvider {
                 .getBody()
                 .getSubject();
 
-        UserDetails userDetails = new User(username, "", new ArrayList<>());  // بارگذاری اطلاعات کاربر
+        UserDetails userDetails = new User(username, "", new ArrayList<>());
 
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }

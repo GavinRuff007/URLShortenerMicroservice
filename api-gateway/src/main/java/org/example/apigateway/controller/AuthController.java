@@ -25,7 +25,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        JwtResponse jwtResponse = authService.login(loginRequest).block(); // فقط برای تست یا اپ ساده
+        JwtResponse jwtResponse = authService.login(loginRequest).block();
         return ResponseEntity.ok(jwtResponse);
     }
 
