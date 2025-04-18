@@ -1,6 +1,5 @@
 package org.example.cachingservice.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 

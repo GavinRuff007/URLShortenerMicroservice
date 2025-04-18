@@ -1,8 +1,6 @@
 package org.example.shortenerservice.service;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.RandomStringUtils;
-
 import org.example.shortenerservice.model.UrlMapping;
 import org.example.shortenerservice.repository.UrlMappingRepository;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -43,7 +41,8 @@ public class UrlShortenerService {
 
         kafkaTemplate.send("url-created-topic", stringStringMap.toString());
 
-        return shortCode;
+        return "http://localhost:8080/r/"+shortCode;
+
     }
 
     private String generateUniqueCode() {

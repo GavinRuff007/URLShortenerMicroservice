@@ -1,19 +1,13 @@
 package org.example.shortenerservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.shortenerservice.dto.ShortenUrlRequest;
+import org.example.shortenerservice.dto.ShortenUrlResponse;
 import org.example.shortenerservice.service.UrlShortenerService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.Instant;
-import java.util.Map;
-
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/shorten")
@@ -23,7 +17,10 @@ public class UrlShortenerController {
     private final UrlShortenerService service;
 
     @PostMapping
-    public String shortenUrl(@RequestBody String originalUrl) {
-        return service.shortenUrl(originalUrl);
+    public ShortenUrlResponse shortenUrl(@RequestBody ShortenUrlRequest originalUrl) {
+        String shortUrl = service.shortenUrl(originalUrl.getLongUrl());
+        ShortenUrlResponse response = new ShortenUrlResponse();
+        response.setShortUrl(shortUrl);
+        return response;
     }
 }
