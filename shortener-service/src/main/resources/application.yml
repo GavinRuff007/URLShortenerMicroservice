@@ -4,10 +4,16 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/url-shortener
+      uri: mongodb://root:example@localhost:27017/
+      database: mongoURL
     redis:
       host: localhost
       port: 6379
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: host.docker.internal:9094
+    consumer:
+      group-id: test-group
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
