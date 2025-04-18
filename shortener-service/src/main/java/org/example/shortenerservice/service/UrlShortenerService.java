@@ -3,6 +3,7 @@ package org.example.shortenerservice.service;
 import lombok.RequiredArgsConstructor;
 import org.example.shortenerservice.model.UrlMapping;
 import org.example.shortenerservice.repository.UrlMappingRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +21,13 @@ public class UrlShortenerService {
     private final UrlMappingRepository repository;
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    private static final int SHORT_CODE_LENGTH = 6;
-    private static final int EXPIRY_HOURS = 7;
+    @Value("${mongodb.expiryhours}")
+    private int expiryhours;
 
     public String shortenUrl(String originalUrl) {
         String shortCode = generateUniqueCode();
 
-        Instant expiryInstant = Instant.now().plus(EXPIRY_HOURS, ChronoUnit.HOURS);
+        Instant expiryInstant = Instant.now().plus(expiryhours, ChronoUnit.HOURS);
         Date expiryDate = Date.from(expiryInstant);
 
         Date createdAt = Date.from(Instant.now());
@@ -53,7 +54,7 @@ public class UrlShortenerService {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();
         StringBuilder code = new StringBuilder();
-        for (int i = 0; i < SHORT_CODE_LENGTH; i++) {
+        for (int i = 0; i < 6; i++) {
             int index = random.nextInt(characters.length());
             code.append(characters.charAt(index));
         }
