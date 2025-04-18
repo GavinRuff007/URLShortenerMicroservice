@@ -22,16 +22,13 @@ public class UrlShortenerService {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     private static final int SHORT_CODE_LENGTH = 6;
-    private static final int EXPIRY_DAYS = 7; // مدت انقضا پیش‌فرض
+    private static final int EXPIRY_DAYS = 7;
 
-    // تابع برای کوتاه کردن URL
     public String shortenUrl(String originalUrl) {
         String shortCode = generateUniqueCode();
 
-        // تاریخ انقضا 7 روز پس از ایجاد
         Instant expiryDate = Instant.now().plus(EXPIRY_DAYS, ChronoUnit.DAYS);
 
-        // ساخت و ذخیره لینک کوتاه
         UrlMapping urlMapping = UrlMapping.builder()
                 .shortCode(shortCode)
                 .originalUrl(originalUrl)
@@ -44,13 +41,11 @@ public class UrlShortenerService {
         stringStringMap.put("shortCode", shortCode);
         stringStringMap.put("originalUrl", originalUrl);
 
-        // ارسال پیام به Kafka برای این لینک ایجاد شده
         kafkaTemplate.send("url-created-topic", stringStringMap.toString());
 
         return shortCode;
     }
 
-    // تابع برای تولید کد کوتاه یکتا
     private String generateUniqueCode() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();

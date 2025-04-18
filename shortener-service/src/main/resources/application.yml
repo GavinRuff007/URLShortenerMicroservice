@@ -11,7 +11,7 @@ spring:
       port: 6379
 
   kafka:
-    bootstrap-servers: host.docker.internal:9094
+    bootstrap-servers: localhost:9092
     consumer:
       group-id: test-group
     producer:

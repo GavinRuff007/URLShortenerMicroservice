@@ -18,8 +18,7 @@ public class GatewayConfig {
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("shortener-service", r -> r.path("/shorten/**")
-                        .filters(f -> f.stripPrefix(1)
-                                .requestRateLimiter(c -> c.setRateLimiter(redisRateLimiter())))
+                        .filters(f -> f.requestRateLimiter(c -> c.setRateLimiter(redisRateLimiter())))
                         .uri("http://localhost:8081"))
                 .route("redirect-service", r -> r.path("/r/**")
                         .filters(f -> f.stripPrefix(1)
