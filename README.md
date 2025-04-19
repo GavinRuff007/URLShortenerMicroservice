@@ -114,10 +114,10 @@ http://localhost:8080/r/abc123 → redirects to ad page for 10s → redirects to
 ---
 ## 📚 Photo of Redirect Page and 404 page
 
-![redirect](docs/images/redirect.png)
+![redirect](docs/image/redirect.png)
 
 
-![404](docs/images/404.png)
+![404](docs/image/404.png)
 
 ## 🧪 Testing
 
