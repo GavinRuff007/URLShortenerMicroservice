@@ -19,19 +19,12 @@ A production-ready, distributed **URL shortener platform** built using **Spring 
 
 ---
 
-## 🧱 System Architecture
+## 🧱 System Architecture (C4 Architecture)
 
-```
-Client
-  ↓
-[ API Gateway ]
-  ├── Auth Service (MySQL + Bcrypt)
-  ├── Shorten Service (MongoDB + Kafka)
-  ├── Redirect Service
-  ├── Caching Service (Redis Subscriber)
-  ↓
-[ Kafka Broker ] ←→ Caching Service
-```
+![ContainerView](docs/image/ContainerView.png)
+
+
+![SystemContext](docs/image/SystemContext.png)
 
 ### 🌐 Flow Summary
 
