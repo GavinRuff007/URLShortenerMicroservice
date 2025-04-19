@@ -1,5 +1,6 @@
 package org.example.redirectservice.service;
 
+import org.example.redirectservice.exception.UrlNotFoundException;
 import org.example.redirectservice.model.UrlMapping;
 import org.example.redirectservice.repository.UrlMappingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class RedirectService {
         }
 
         UrlMapping mapping = repository.findByShortCode(shortUrl)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Short URL not found"));
+                .orElseThrow(() -> new UrlNotFoundException("Short URL not found"));
 
         redisTemplate.opsForValue().set(redisKey, mapping.getOriginalUrl(), timeUnit, timeUnit1);
 
