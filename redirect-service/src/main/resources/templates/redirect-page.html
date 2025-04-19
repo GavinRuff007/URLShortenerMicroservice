@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fa" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>در حال انتقال...</title>
+    <meta http-equiv="refresh" content="3" th:content="'3;url=' + ${targetUrl}" />
+    <style>
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background: linear-gradient(135deg, #3a6186, #89253e);
+            color: white;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+        .countdown {
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .ad-banner {
+            width: 160px;
+            height: 600px;
+            border: 2px solid white;
+            margin-right: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="ad-banner">
+    جایگاه بنر تبلیغاتی
+</div>
+
+<div class="content">
+    <h1>در حال انتقال به لینک مقصد...</h1>
+    <p>لطفاً چند لحظه صبر کنید، شما در حال هدایت به آدرس مورد نظر هستید.</p>
+    <div class="countdown">5</div>
+</div>
+
+<script>
+    let seconds = 5;
+    const countdownEl = document.querySelector(".countdown");
+    const interval = setInterval(() => {
+        seconds--;
+        countdownEl.textContent = seconds;
+        if (seconds === 0) {
+            clearInterval(interval);
+            window.location.href = /*[[${targetUrl}]]*/ "";
+        }
+    }, 1000);
+</script>
+</body>
+</html>
