@@ -171,30 +171,8 @@ All critical modules are covered with **unit tests**, including edge cases and f
 We follow **Semantic Versioning**:
 
 ```
-Current Version: 1.0.0
+Current Version: 1.2.0
 ```
-
----
-
-## 📚 Commit Convention
-
-Use **Conventional Commits**:
-
-```
-feat: add shortener controller
-fix: resolve MongoDB TTL index bug
-docs: update README with curl examples
-```
-
----
-
-## 🙌 Contributions
-
-We welcome PRs! Please ensure:
-
-- All tests pass
-- Follows coding standards
-- Meaningful commit messages
 
 ---
 
@@ -202,9 +180,9 @@ We welcome PRs! Please ensure:
 
 Feel free to reach out:
 
-- Email: [yourname@domain.com](mailto:yourname@domain.com)
+- Email: [parsa10007@gmail.com](mailto:parsa10007@gmail.com)
 - GitHub Issues for bugs & feature requests
 
 ---
 
-**Made with ☕, Spring, and ❤️ by [Your Name]**
+**Made with ☕, Spring, and ❤️ by [Parsa Eftekharmanesh]**
